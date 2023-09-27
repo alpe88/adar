@@ -3,7 +3,7 @@ import { useGridListSelectionCheckbox } from "react-aria";
 // Reuse the Checkbox from your component library. See below for details.
 import { Checkbox } from "../Checkbox";
 
-function ListCheckbox({ item, state }) {
+export function ListCheckbox({ item, state }) {
   let { checkboxProps } = useGridListSelectionCheckbox(
     { key: item.key },
     state
