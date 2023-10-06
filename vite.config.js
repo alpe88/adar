@@ -8,7 +8,7 @@ export default defineConfig({
       entry: resolve(__dirname, "lib/index.jsx"),
       name: "adar",
 
-      fileName: "index",
+      fileName: (format) => `index.${format}.js`,
     },
     rollupOptions: {
       external: ["react"],
