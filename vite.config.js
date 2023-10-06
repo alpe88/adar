@@ -5,7 +5,7 @@ import { defineConfig } from "vite";
 export default defineConfig({
   build: {
     lib: {
-      entry: resolve(__dirname, "lib/index.jsx"),
+      entry: resolve(__dirname, "src/index.jsx"),
       name: "adar",
       fileName: (format) => `index.${format}.js`,
     },
