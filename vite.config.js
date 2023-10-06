@@ -1,5 +1,5 @@
 //vite.config.js
-
+import { resolve } from "path";
 import { defineConfig } from "vite";
 
 export default defineConfig({
@@ -10,7 +10,6 @@ export default defineConfig({
       fileName: (format) => `index.${format}.js`,
     },
     rollupOptions: {
-      // External dependencies
       external: ["react", "react-dom"],
       output: {
         format: "umd",
