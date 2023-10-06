@@ -1,6 +1,6 @@
 {
   "name": "@alpe88/adar",
-  "version": "0.0.1",
+  "version": "0.0.1-alpha1",
   "description": "A React component library focusing on accessibility",
   "private": false,
   "type": "module",
