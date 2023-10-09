@@ -14,8 +14,30 @@ jobs:
           node-version: 20
       - run: npm ci
 
-  publish-gpr:
+  audit-fix:
     needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 20
+      - run: npm ci
+      - run: npm audit fix # Add this step to run `npm audit fix`
+      - name: Check for Changes
+        id: changes
+        run: |
+          git add .
+          git diff --quiet --exit-code || {
+            git config --local user.email "action@github.com"
+            git config --local user.name "GitHub Action"
+            git commit -m "Fix vulnerabilities"
+            echo "::set-output name=changes::true"
+          }
+        continue-on-error: true
+
+  publish-gpr:
+    needs: [build, audit-fix] # Ensure that `audit-fix` job runs before this job
     runs-on: ubuntu-latest
     permissions:
       packages: write

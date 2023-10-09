@@ -7,13 +7,10 @@
   "files": [
     "dist"
   ],
-  "main": "dist/adar.umd.js",
-  "module": "dist/adar.es.js",
-  "exports": {
-    ".": {
-      "import": "./dist/adar.es.js",
-      "require": "./dist/adar.umd.js"
-    }
+  "main": "dist/main.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/alpe88/adar"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
