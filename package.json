@@ -31,6 +31,7 @@
     "@alpe88:registry": "https://npm.pkg.github.com"
   },
   "devDependencies": {
+    "vite-plugin-dts": "^3.6.0",
     "@storybook/addon-essentials": "^7.4.1",
     "@storybook/addon-interactions": "^7.4.1",
     "@storybook/addon-links": "^7.4.1",
