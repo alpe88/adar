@@ -9,6 +9,11 @@ jobs:
   create-release:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3 # Use version 3 of actions/checkout
+        with:
+          ref: main # Specify the branch you want to check out
+
       - name: Check Commit Message
         id: check-commit
         run: |
@@ -17,9 +22,9 @@ jobs:
           echo "::set-env name=CONTAINS_ALPHA::$(echo $commit_message | grep -i 'alpha' || true)"
 
       - name: Set up Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v3 # Use version 3 of actions/setup-node
         with:
-          node-version: 20
+          node-version: 20 # Specify Node.js version 20
 
       - name: Get Version from package.json
         id: get-version
