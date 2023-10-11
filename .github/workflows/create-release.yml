@@ -14,21 +14,25 @@ jobs:
         with:
           ref: main
 
-      - name: Get Latest Commit Message
-        id: get-commit-message
-        run: echo "COMMIT_MESSAGE=$(git log -1 --pretty=%B)" >> $GITHUB_ENV
-
       - name: Create GitHub Release
         id: create-release
         run: |
-          commit_message="${{ env.COMMIT_MESSAGE }}"
-          tag_name="v$(echo $commit_message | grep -o -E "v[0-9]+\.[0-9]+\.[0-9]+(-\w+\.\d+\.\d+\.\d+)?" || true)"
+          commit_message=$(git log -1 --pretty=%B)
 
-          # Check if the commit message contains "alpha" and set the prerelease flag accordingly
+          # Extract version tag (e.g., v0.0.1-alpha.1.6.4.1)
+          tag_name=$(echo $commit_message | grep -o -E "v[0-9]+\.[0-9]+\.[0-9]+(-\w+\.\d+\.\d+\.\d+)?" || true)
+
+          # Set the prerelease flag if the commit message contains "alpha"
           if [[ $commit_message == *"alpha"* ]]; then
             prerelease="true"
           else
             prerelease="false"
+          fi
+
+          # If tag_name is empty, exit without creating a release
+          if [ -z "$tag_name" ]; then
+            echo "No valid version found in the commit message."
+            exit 0
           fi
 
           release_title="Release $tag_name"
