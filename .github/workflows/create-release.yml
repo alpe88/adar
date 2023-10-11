@@ -19,8 +19,8 @@ jobs:
         run: |
           commit_message=$(git log -1 --pretty=%B)
 
-          # Extract version tag (e.g., v0.0.1-alpha.1.6.4.1)
-          tag_name=$(echo $commit_message | grep -o -E "v[0-9]+\.[0-9]+\.[0-9]+(-\w+\.\d+\.\d+\.\d+)?" || true)
+          # Extract the entire version tag (e.g., v0.0.1-alpha.1.6.4.1)
+          tag_name=$(echo $commit_message | grep -o -E "v[0-9]+\.[0-9]+\.[0-9]+(-[a-zA-Z]+(\.\d+)+)?" || true)
 
           # Set the prerelease flag if the commit message contains "alpha"
           if [[ $commit_message == *"alpha"* ]]; then
