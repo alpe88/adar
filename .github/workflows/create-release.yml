@@ -45,7 +45,7 @@ jobs:
           echo "Is Pre-Release: $prerelease"
 
           response=$(curl -X POST "https://api.github.com/repos/${GITHUB_REPOSITORY}/releases" \
-            -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
+            -H "Authorization: Bearer ${{ secrets.CREATE_RELEASE_TOKEN }}" \
             -H "Content-Type: application/json" \
             -d '{
               "tag_name": "'"$tag_name"'",
