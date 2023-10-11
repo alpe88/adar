@@ -8,6 +8,11 @@ import dts from "vite-plugin-dts";
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react(), dts({ include: ["lib"] })],
+  css: {
+    postcss: {
+      plugins: [tailwindcss],
+    },
+  },
   build: {
     copyPublicDir: false,
     lib: {
@@ -15,7 +20,7 @@ export default defineConfig({
       formats: ["es"],
     },
     rollupOptions: {
-      external: ["react", "react/jsx-runtime"],
+      external: ["react", "react/jsx-runtime", "react-dom", "tailwindcss"],
       input: Object.fromEntries(
         // https://rollupjs.org/configuration-options/#input
         glob.sync("lib/**/*.{js,jsx}").map((file) => [
@@ -30,6 +35,12 @@ export default defineConfig({
       output: {
         assetFileNames: "assets/[name][extname]",
         entryFileNames: "[name].js",
+        globals: {
+          react: "React",
+          "react/jsx-runtime": "react/jsx-runtime",
+          "react-dom": "ReactDOM",
+          tailwindcss: "tailwindcss",
+        },
       },
     },
   },
